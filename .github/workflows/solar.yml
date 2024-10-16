@@ -20,6 +20,9 @@ jobs:
             image: mongo:latest
             ports:
               - 27017:27017
+            env:
+              MONGO_INITDB_ROOT_USERNAME: nonprod-user  # Set root username
+              MONGO_INITDB_ROOT_PASSWORD: nonprod-pass  # Set root password
         env:
           MONGO_URI: 'mongodb://localhost:27017/superData'
           MONGO_USERNAME: nonprod-user
