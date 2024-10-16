@@ -24,7 +24,7 @@ jobs:
               MONGO_INITDB_ROOT_USERNAME: nonprod-user  # Set root username
               MONGO_INITDB_ROOT_PASSWORD: nonprod-pass  # Set root password
         env:
-          MONGO_URI: 'mongodb://localhost:27017/superData'
+          MONGO_URI: 'mongodb://nonprod-user:nonprod-pass@localhost:27017/superData'
           MONGO_USERNAME: nonprod-user
           MONGO_PASSWORD: nonprod-pass
         runs-on: ubuntu-latest
