@@ -183,8 +183,7 @@ jobs:
           run: |
             echo "INGRESS_IP=$(kubectl -n ingress-nginx get services ingress-nginx-controller -o jsonpath="{.status.loadBalancer.ingress[0].ip}")" >> $GITHUB_ENV    
           # geting dynamic ip of loadbalancer
-      # create repository variable for yaml manifesting file for deployment
-      # and replicas
+      # create repository variable for yaml manifesting file for deployment and replicas repo variable
 
         - name: Replace Token in Manifest files
           uses: cschleiden/replace-tokens@v1
@@ -202,3 +201,21 @@ jobs:
         - name: Check files if replaced
           run: |
             cat kubernetes/development/*.yaml
+
+        - name: Create MongoDB secret
+          run: |
+            kubectl -n ${{ vars.NAMESPACE }} create secret generic mongo-db-creds \
+            --from-literal=MONGO_URI=${{ env.MONGO_URI }} \
+            --from-literal=MONGO_USERNAME=${{ vars.MONGO_USERNAME }} \
+            --from-literal=MONGO_PASSWORD=${{ secrets.MONGO_PASSWORD }} \
+            --save-config \
+            --dry-run=client \
+            -o yaml | kubectl apply -f -
+
+          # create mongo-db-cred as need in deployment yaml
+
+        - name: Deploy to Dev Env
+          run: |
+            kubectl apply -f kubernetes/development
+
+          # deploy the application development
