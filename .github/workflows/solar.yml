@@ -187,7 +187,7 @@ jobs:
       # and replicas
 
         - name: Replace Token in Manifest files
-          uses: scshleiden/replace-tokena@v1
+          uses: scshleiden/replace-token@v1
           with:
             tokenPrefix: '_{_'
             tokenSuffix: '_}_'
