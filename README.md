@@ -47,3 +47,40 @@ If the installation was successful, you should be able to run the following comm
 ## Access Application on Browser
     http://localhost:3000/
 
+
+# This is the 
+
+```mermaid
+graph TD;
+    A[User] --> B[Azure Application Gateway]
+    B --> C[Azure App Service]
+    C --> D[Node.js Backend]
+    D --> E[Azure Cosmos DB]
+    D --> F[Azure Blob Storage]
+
+    subgraph Azure Cloud
+        B
+        C
+        D
+        E
+        F
+        end
+
+
+
+```
+--------------------
+
+```mermaid
+
+architecture-beta
+    group api(cloud)[API]
+
+    service db(database)[Database] in api
+    service disk1(disk)[Storage] in api
+    service disk2(disk)[Storage] in api
+    service server(server)[Server] in api
+
+    db:L -- R:server
+    disk1:T -- B:server
+    disk2:T -- B:db
