@@ -103,6 +103,8 @@ jobs:
       name: Containerization
       needs: [unit_testing, code_coverage]
       uses: ./.github/workflows/reuse-deployment.yml
+      secrets: 
+        docker-pass: ${{ secrets.DOCKERHUB_PASSWORD }}
 
       #{{comment for reusable workflow}}
       # permissions:

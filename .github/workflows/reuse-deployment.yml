@@ -2,6 +2,9 @@ name: Containerization - Reusable Workflow
 
 on:
     workflow_call: 
+        secrets:
+            docker-pass:
+                required: true
 
 jobs:
     reuse-deploy:
@@ -16,7 +19,7 @@ jobs:
           uses: docker/login-action@v2.2.0
           with:
             username: ${{ vars.DOCKERHUB_USERNAME }}
-            password: ${{ secrets.DOCKERHUB_PASSWORD }}
+            password: ${{ secrets.docker-pass }}
 
         - name: GHCR Login
           uses: docker/login-action@v2.2.0
