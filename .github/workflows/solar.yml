@@ -105,6 +105,8 @@ jobs:
       uses: ./.github/workflows/reuse-deployment.yml
       secrets: 
         docker-pass: ${{ secrets.DOCKERHUB_PASSWORD }}
+      permissions: 
+        packages: write
 
       #{{comment for reusable workflow}}
       # permissions:
