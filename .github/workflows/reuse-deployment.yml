@@ -2,6 +2,48 @@ name: Containerization - Reusable Workflow
 
 on:
     workflow_call: 
+        #for env ennvronment within 1 workflow passing to main workflow
+        # inputs:
+        #   mongodb-uri:
+        #     required: true
+        #     type: string
+            # kubectl-version:
+            #     description: Provide the required kubectl version
+            #     default: v1.26.0
+            #     required: false
+            #     type: string
+            # k8s-manifest-dir:
+            #     description: Directory containing kubernetes manifests files
+            #     default: kubernetes/
+            #     required: true
+            #     type: string
+            # environment:
+            #     description: Provide the Deployment Environment
+            #     default: dev
+            #     required: true
+            #     type: string
+                #can get this inputs from kubectl-version to environment -- to jobs steps
+                #sample '$ {{ inputs.kubectl-version}}'
+                # in main workflow to get the input is
+                #with:
+                    #environment: production
+                    #k8s-manifest-dir: kubernetes/production
+
+#         outputs:
+#             application_url:
+#                 value: ${{ jobs.reuse-deploy.outputs.valuesampleherefromjobshereinthisfile }}
+
+# in dev-integration testing in main workflow
+#     steps:
+#         - name: TEST URL Output using CURL and JQ
+#           env:
+#             URL: ${{ needs.dev-deploy.outputs.application_url }}
+#           run: |
+#             echo $URL
+#             echo "------------------------"
+#             curl https://$URL/live -s -k | jq -r .status | grep -i live
+
+
         secrets:
             docker-pass:
                 required: true
